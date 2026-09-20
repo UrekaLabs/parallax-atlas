@@ -4,14 +4,14 @@ Edition label: `2026-10`
 
 ## 2026-10
 
-- Initial public Atlas scaffold.
+- Published pages: page count set at release
 - Immutable edition root: `/editions/2026-10/`
 - Movable latest pointer: `/latest/`
 - Patch releases: `/editions/2026-10-patch-N/`
 
 ## Rescheduled draft
 
-- The planned `2026-09` edition was never published. DEC-2 moved the first edition to `2026-10` on 2026-10-01.
+- The planned `2026-09` edition was never published; the first edition moved to 2026-10-01.
 
 ## Patch policy
 

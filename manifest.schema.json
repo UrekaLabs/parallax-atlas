@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approvals_hash": {
+      "type": "string"
+    },
+    "corrections": {
+      "additionalProperties": false,
+      "properties": {
+        "patch_root": {
+          "type": "string"
+        },
+        "policy": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "policy",
+        "patch_root"
+      ],
+      "type": "object"
+    },
+    "counts": {
+      "additionalProperties": false,
+      "properties": {
+        "candidates": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "passed": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "published": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "candidates",
+        "passed",
+        "published"
+      ],
+      "type": "object"
+    },
+    "edition": {
+      "type": "string"
+    },
+    "format": {
+      "const": 1
+    },
+    "pages": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "provenance": {
+            "type": "string"
+          },
+          "public_id": {
+            "type": "string"
+          },
+          "rights": {
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "topics": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "public_id",
+          "title",
+          "path",
+          "url",
+          "sha256",
+          "rights",
+          "provenance",
+          "topics"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "source_cutoff": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "edition",
+    "format",
+    "approvals_hash",
+    "source_cutoff",
+    "counts",
+    "corrections",
+    "pages"
+  ],
+  "title": "Atlas edition manifest format 1",
+  "type": "object"
+}
