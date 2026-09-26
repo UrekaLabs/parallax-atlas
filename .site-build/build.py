@@ -419,9 +419,16 @@ def area_tree_markdown(children: dict[str | None, list[Area]]) -> list[str]:
     return lines
 
 
-def generated_page(markdown: str, title: str, output: PurePosixPath, label: str) -> Page:
+def generated_page(
+    markdown: str, title: str, output: PurePosixPath, label: str,
+    editions: list[str] | None = None,
+) -> Page:
     document = parse_markdown(markdown, label)
     document["meta"]["title"] = {"t": "MetaString", "c": title}
+    document["meta"]["index-editions"] = {
+        "t": "MetaList",
+        "c": [{"t": "MetaString", "c": edition} for edition in editions or []],
+    }
     return Page(label, None, output, document, title, None, [])
 
 
@@ -689,7 +696,7 @@ def build(args: argparse.Namespace) -> None:
         )
         body.append("")
         page = generated_page(
-            "\n".join(body), "Editions", PurePosixPath("editions/index.html"), "generated:editions"
+            "\n".join(body), "Editions", PurePosixPath("editions/index.html"), "generated:editions", edition_ids
         )
         reserve_output(reserved, page.output, page.source_label)
         pages.append(page)
@@ -701,7 +708,7 @@ def build(args: argparse.Namespace) -> None:
         index_body.extend(area_tree_markdown(area_children))
         index_body.append("")
         index_page = generated_page(
-            "\n".join(index_body), "Topics", PurePosixPath("areas/index.html"), "generated:areas"
+            "\n".join(index_body), "Topics", PurePosixPath("areas/index.html"), "generated:areas", edition_ids
         )
         reserve_output(reserved, index_page.output, index_page.source_label)
         pages.append(index_page)
@@ -744,7 +751,7 @@ def build(args: argparse.Namespace) -> None:
             body.append("")
             output = PurePosixPath("areas") / PurePosixPath(area.slug) / "index.html"
             hub = generated_page(
-                "\n".join(body), area.title, output, f"generated:area:{area.slug}"
+                "\n".join(body), area.title, output, f"generated:area:{area.slug}", edition_ids
             )
             reserve_output(reserved, hub.output, hub.source_label)
             pages.append(hub)

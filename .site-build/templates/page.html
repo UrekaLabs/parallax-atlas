@@ -14,6 +14,9 @@
 $if(edition-label)$
       <span class="edition-label">Edition $edition-label$</span>
 $endif$
+$for(index-editions)$
+      <span class="edition-label">Edition $index-editions$</span>
+$endfor$
       <nav aria-label="Primary navigation">
         <a href="/">Home</a>
 $if(has-latest)$

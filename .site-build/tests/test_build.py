@@ -4,6 +4,7 @@ import hashlib
 import html
 import json
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -637,3 +638,48 @@ def test_markdown_download_output_collision_is_refused_before_writes(tmp_path: P
     assert "output collision" in result.stderr
     assert "page.md" in result.stderr
     assert not out.exists()
+
+
+@pytest.mark.parametrize("surface", ["atlas", "publications"])
+@pytest.mark.parametrize("editions", [[], ["2027-03"], ["2027-03-patch-2"], ["2026-10", "2027-03"]])
+def test_generated_indexes_show_actual_edition_labels_and_preserve_sources(
+    tmp_path: Path, surface: str, editions: list[str]
+) -> None:
+    src = tmp_path / "src"
+    src.mkdir()
+    for edition in editions:
+        directory = src / "editions" / edition
+        directory.mkdir(parents=True)
+        (directory / "index.md").write_text(f"# Edition {edition}\n", encoding="utf-8")
+        (directory / "topic.md").write_text(
+            f"# Topic\n\nEdition label: `{edition}`\n\n"
+            "Source: [Public record](https://example.test/source).\n",
+            encoding="utf-8",
+        )
+    areas = tmp_path / "areas.json"
+    areas.write_text(json.dumps([
+        {"slug": "parent", "title": "Parent", "parent": None, "status": "open"},
+        {"slug": "parent/child", "title": "Child", "parent": "parent", "status": "open"},
+        {"slug": "empty", "title": "Empty", "parent": None, "status": "open"},
+    ]), encoding="utf-8")
+    before = tree_hashes(src)
+    out = tmp_path / "out"
+    extra = ["--areas", str(areas)] if surface == "atlas" else []
+    result = run_build(src, out, surface, *extra)
+    assert result.returncode == 0, result.stderr
+    assert tree_hashes(src) == before
+    indexes = ["editions/index.html"] if editions else []
+    if surface == "atlas":
+        indexes += ["areas/index.html", "areas/parent/index.html",
+                    "areas/parent/child/index.html", "areas/empty/index.html"]
+    for relative in indexes:
+        rendered = (out / relative).read_text(encoding="utf-8")
+        labels = re.findall(r'<span class="edition-label">([^<]*)</span>', rendered)
+        assert labels == [f"Edition {edition}" for edition in sorted(editions)]
+    for edition in editions:
+        relative = Path("editions") / edition / "topic.md"
+        assert (out / relative).read_bytes() == (src / relative).read_bytes()
+        rendered = (out / relative.with_suffix("") / "index.html").read_text(encoding="utf-8")
+        labels = re.findall(r'<span class="edition-label">([^<]*)</span>', rendered)
+        assert labels == [f"Edition {edition}"]
+        assert 'href="https://example.test/source"' in rendered
