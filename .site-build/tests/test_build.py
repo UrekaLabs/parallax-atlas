@@ -683,3 +683,12 @@ def test_generated_indexes_show_actual_edition_labels_and_preserve_sources(
         labels = re.findall(r'<span class="edition-label">([^<]*)</span>', rendered)
         assert labels == [f"Edition {edition}"]
         assert 'href="https://example.test/source"' in rendered
+
+
+def test_stylesheet_makes_no_external_requests() -> None:
+    css = (BUILD_ROOT / "assets" / "site.css").read_text(encoding="utf-8")
+    code = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    assert "@import" not in code.lower()
+    assert re.search(r"\burl\s*\(", code, re.I) is None
+    assert re.search(r"(?:https?:)?//", code) is None
+    assert len(css.encode("utf-8")) < 15 * 1024
