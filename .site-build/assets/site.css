@@ -15,7 +15,8 @@
   --serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
   --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --measure: 33rem;
+  --measure: 42rem;
+  --wide: 64rem;
   --header-offset: 1.5rem;
   font-family: var(--serif);
   font-size: 100%;
@@ -192,7 +193,7 @@ main {
   border: 1px solid var(--border);
   border-radius: 4px;
   margin: clamp(0rem, 3vw, 2rem) auto 0;
-  max-width: calc(var(--measure) + 2 * clamp(1rem, 6vw, 4rem));
+  max-width: var(--wide);
   min-height: 60vh;
   overflow-wrap: break-word;
   padding: clamp(1.25rem, 5vw, 3.25rem) clamp(1rem, 6vw, 4rem) clamp(2rem, 6vw, 4rem);
@@ -207,6 +208,12 @@ main {
 
 main > :first-child {
   margin-top: 0;
+}
+
+/* Text keeps a readable line length; tables and code blocks use the full panel. */
+main > :not(table, pre, div.sourceCode) {
+  margin-inline: auto;
+  max-width: var(--measure);
 }
 
 p,
@@ -516,6 +523,10 @@ h2[id^="related"] + ul > li {
     margin: 0;
     max-width: none;
     padding: 0;
+  }
+
+  main > :not(table, pre, div.sourceCode) {
+    max-width: none;
   }
 
   a {
