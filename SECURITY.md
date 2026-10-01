@@ -11,10 +11,21 @@ Use this repository only for the public Atlas contract and approved monthly edit
 
 ### Report:
 
+Report these by email to the addresses above, not in a GitHub issue.
+
 - schema regressions
 - broken manifests
 - broken provenance links
 - security or privacy concerns
+
+## GitHub issues
+
+Issues in this repository are not monitored. Send corrections, removal requests and feedback to
+`corrections@urekalabs.ai`, and security and privacy reports to `security@urekalabs.ai`.
+
+**Never post a victim's identity, a minor's identity, or anyone's private information in a
+public issue, pull request or comment.** Anything posted there is public at once and can be
+copied before it is taken down. Email it instead.
 
 ## Incident response
 

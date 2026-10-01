@@ -1,0 +1,11 @@
+# GitHub issues in this repository are not monitored. The issue form shows only these
+# contact links. Never post a victim's identity, a minor's identity or anyone's private
+# information in a public issue: email it instead.
+blank_issues_enabled: false
+contact_links:
+  - name: Corrections, removal requests and feedback
+    url: mailto:corrections@urekalabs.ai
+    about: Report an error or ask for a removal by email. For general feedback, use the subject line "Feedback". Issues here are not monitored.
+  - name: Security and privacy reports
+    url: mailto:security@urekalabs.ai
+    about: Report a security, integrity or privacy problem by email. Never post victim or private information in a public issue.

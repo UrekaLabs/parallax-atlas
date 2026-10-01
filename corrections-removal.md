@@ -36,6 +36,13 @@ and handled the same way.
 
 You do not need to be the subject of the material to report an error in it.
 
+### 3a. Feedback that is not a correction
+
+General feedback, such as a comment, a question or a suggestion for future work, also goes to
+`corrections@urekalabs.ai`, with the subject line `Feedback`. We read it, but we do not log it
+as a correction, and we do not promise a reply. If you think something we published is wrong,
+report it as a correction under § 3, so that it gets a severity and a deadline.
+
 ### 4. Triage
 
 We acknowledge within **three working days**. Severity sets the deadline for fixing:
