@@ -2,6 +2,9 @@
 
 Edition label: `2026-10`
 
+Correction notices are listed on the [Correction Notice Register](corrections/index.md) page,
+and removals on the [Removals Log](corrections/removals-log.md) page.
+
 ## 2026-10
 
 - Published pages: page count set at release

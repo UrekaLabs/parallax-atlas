@@ -53,16 +53,17 @@ We acknowledge within **three working days**. Severity sets the deadline for fix
 | **2** | A supporting fact, figure, citation, or quotation is wrong | 14 days |
 | **3** | Typographic, formatting, link, or presentational | Next edition |
 
-A severity-1 report that we cannot resolve inside 72 hours gets an interim public notice
-saying the claim is under review, rather than silence while we work.
+A severity-1 report that we cannot resolve inside 72 hours gets an
+[interim public notice](corrections/index.md#under-review) saying the claim is under review,
+rather than silence while we work.
 
 ### 5. How a correction is published
 
 Editions are immutable under this publication policy. We do not edit a published edition in
 place. Instead:
 
-1. A **correction notice** is written: what was published, what is correct, what evidence
-   changed our mind, and the date.
+1. A **[correction notice](corrections/index.md#correction-notices)** is written: what was
+   published, what is correct, what evidence changed our mind, and the date.
 2. A **patch release** of the affected edition is published carrying the fix — for example
    `2026-10-patch-1`. The original edition remains reachable at its own URL.
 3. The **release-history** page and the `latest` pointer are updated.
@@ -156,14 +157,14 @@ response on the record. We would rather publish a disagreement than quietly bury
    with reasons.
 5. **Action** — the removal or redaction ships as a patch release of the affected edition,
    per [the corrections policy](#corrections-policy) § 5.
-6. **Log entry** in the public removals log.
+6. **Log entry** in the public [removals log](corrections/removals-log.md).
 
 ### 5. The removals log
 
-We publish a running log of removals. Each entry records the edition, the date, the ground
-category, and the scope of what was removed. **It does not record the identity of the
-subject or the requester**, and it does not restate the removed material — a log that
-re-identifies the person it protected would defeat itself.
+We publish a running [log of removals](corrections/removals-log.md). Each entry records the
+edition, the date, the ground category, and the scope of what was removed. **It does not
+record the identity of the subject or the requester**, and it does not restate the removed
+material — a log that re-identifies the person it protected would defeat itself.
 
 The log exists so that the removal power is visible and countable. A publisher who can
 quietly remove material is a publisher whose archive cannot be trusted; the log is what
